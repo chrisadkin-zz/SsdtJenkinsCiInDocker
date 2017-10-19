@@ -1,0 +1,1 @@
+docker exec -it jenkins-master powershell Get-ChildItem -Path C:\ -Include git.exe,msbuild.exe,sqlpackage.exe,sqlcmd.exe -Recurse -ErrorAction SilentlyContinue -Force

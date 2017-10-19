@@ -1,0 +1,36 @@
+########################################################################
+#
+# title:       Docker Compose YAML file for Virtual-Vehicles Project
+# author:      Gary A. Stafford (https://programmaticponderings.com)
+# url:         https://github.com/garystafford/virtual-vehicles-docker  
+# description: Pulls (5) images, builds (5) images, and builds (11) containers,
+#              for the Virtual-Vehicles Java microservices example REST API
+# to run:      docker-compose -p mssql-data-tools-ci up -d
+#
+######################################################################## 
+version: "3.3"
+services:
+  jenkins:
+    build:          .
+    image:          chrisadkin/jenkins-ssdt-master:v1
+    container_name: jenkins-master
+    ports:          ["8080:8080"]
+    links:
+      - "sqlserver:database"
+      
+  sqlserver:
+    image: microsoft/mssql-server-windows-express
+    container_name: mssql-win-express
+    ports:          ["1433:1433"]
+    environment:
+      sa_password:  P@ssW0rd!
+      accept_eula:  Y
+    networks:
+         default:
+             aliases:
+                 - db
+                 
+networks:
+  default:
+    external:
+      name: nat                 
