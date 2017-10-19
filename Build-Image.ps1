@@ -1,2 +1,2 @@
-docker rmi -f jenkins-ssdt-master
-docker image build --tag jenkins-ssdt-master --file Dockerfile .
+docker rmi -f chrisadkin/jenkins-ssdt-master:v1
+docker image build --tag chrisadkin/jenkins-ssdt-master:v1 --file Dockerfile .
